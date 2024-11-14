@@ -1,0 +1,69 @@
+@startuml
+class Board {
+  squares
+  initializeBoard()
+  movePiece()
+  getPieceAt()
+  isCheck()
+  isCheckmate()
+}
+
+class Piece {
+  position
+  color
+  isCaptured
+  move()
+  validMoves()
+}
+
+class King extends Piece {
+  castling
+}
+
+class Queen extends Piece {}
+class Rook extends Piece {}
+class Bishop extends Piece {}
+class Knight extends Piece {}
+class Pawn extends Piece {
+  enPassant
+}
+
+class Player {
+  name
+  color
+  makeMove()
+  getAvailableMoves()
+}
+
+class Game {
+  players
+  board
+  currentTurn
+  startGame()
+  endGame()
+  switchTurn()
+  checkStatus()
+}
+
+class Move {
+  startPosition
+  endPosition
+  pieceMoved
+  pieceCaptured
+  executeMove()
+  undoMove()
+}
+
+Board "1" *-- "32" Piece
+Player "1" -- "1" Game
+Game "1" *-- "1" Board
+Game "1" *-- "2" Player
+Piece <|-- King
+Piece <|-- Queen
+Piece <|-- Rook
+Piece <|-- Bishop
+Piece <|-- Knight
+Piece <|-- Pawn
+Move "1" *-- "1" Piece
+
+@enduml
